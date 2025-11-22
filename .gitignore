@@ -3,3 +3,10 @@ node_modules
 .env
 dist
 coverage
+
+# User requested exclusions
+images/
+frontend-old/
+*.pdf
+*.docx
+choppi-frontend-app/

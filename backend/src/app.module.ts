@@ -3,6 +3,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { StoresModule } from './stores/stores.module';
+import { ProductsModule } from './products/products.module';
+import { StoreProductsModule } from './store-products/store-products.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -23,8 +29,14 @@ import { AppService } from './app.service';
       }),
       inject: [ConfigService],
     }),
+    StoresModule,
+    ProductsModule,
+    StoreProductsModule,
+    UsersModule,
+    AuthModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
