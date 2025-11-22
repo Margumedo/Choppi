@@ -496,3 +496,9 @@ It can also happen if the client has a browser extension installed which messes 
 
 [00:04:03.731] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
 [00:04:43.274] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:47:40.236] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:47:57.886] Server  LOG      ✓ Compiled in 80ms
+[00:47:58.172] Browser ERROR   uncaughtError: ReferenceError: z is not defined
+[00:47:59.797] Server  LOG      ✓ Compiled in 120ms
+[00:47:59.860] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:48:00.136] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
