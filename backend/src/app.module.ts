@@ -15,6 +15,7 @@ import { CartModule } from './cart/cart.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: process.env.ENV_FILE || '.env',
       validationSchema: Joi.object({
         DB_HOST: Joi.string().required(),
         DB_PORT: Joi.number().default(5432),
@@ -23,6 +24,8 @@ import { CartModule } from './cart/cart.module';
         DB_DATABASE: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         PORT: Joi.number().default(3000),
+        DB_SSL: Joi.boolean().default(false),
+        DB_SYNCHRONIZE: Joi.boolean().default(false),
       }),
     }),
     TypeOrmModule.forRootAsync({
@@ -35,7 +38,8 @@ import { CartModule } from './cart/cart.module';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true, // Set to false in production
+        synchronize: configService.get<string>('DB_SYNCHRONIZE') === 'true',
+        ssl: (configService.get('DB_SSL') === 'true' || configService.get('DB_SSL') === true) ? { rejectUnauthorized: false } : false,
       }),
       inject: [ConfigService],
     }),
@@ -49,4 +53,6 @@ import { CartModule } from './cart/cart.module';
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule { }
+console.log('DB_HOST:', process.env.DB_HOST);

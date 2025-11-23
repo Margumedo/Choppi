@@ -6,8 +6,10 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { HeroCarousel } from "@/components/hero-carousel"
 import { ShoppingBag, MapPin, Zap, Lock, TrendingUp, Truck } from "lucide-react"
+import { useAuth } from "@/hooks/use-auth"
 
 export default function Home() {
+  const { user, isAuthenticated } = useAuth()
   return (
     <>
       <Navbar />
@@ -23,16 +25,33 @@ export default function Home() {
                 </h1>
               </div>
               <p className="text-lg text-muted-foreground max-w-lg">
-                Compra fácilmente en tu supermercado favorito, ahida tus productos al carrito y recibe tus compras
-                entregadas por nuestros Choppers dedicados, ya sea para ti o para enviar a tus familias.
+                {isAuthenticated && user ? (
+                  <span className="text-2xl sm:text-3xl font-bold text-foreground block mb-2">
+                    ¡Bienvenido, {user.name.split(' ')[0]}! 🌟
+                    <br />
+                    <span className="text-lg sm:text-xl text-muted-foreground font-normal mt-2 block">
+                      Tus tiendas favoritas te esperan. ¿Qué vamos a pedir hoy?
+                    </span>
+                  </span>
+                ) : (
+                  "Compra fácilmente en tu supermercado favorito, añade tus productos al carrito y recibe tus compras entregadas por nuestros Choppers dedicados."
+                )}
               </p>
               <div className="flex gap-4 pt-2">
-                <Link href="/login">
-                  <CustomButton size="lg">Inicia Sesión</CustomButton>
-                </Link>
+                {!isAuthenticated ? (
+                  <Link href="/login">
+                    <CustomButton size="lg">Inicia Sesión</CustomButton>
+                  </Link>
+                ) : (
+                  <Link href="/cart">
+                    <CustomButton variant="outline" size="lg">
+                      Ir al Carrito
+                    </CustomButton>
+                  </Link>
+                )}
                 <Link href="/stores">
-                  <CustomButton variant="outline" size="lg">
-                    Explorar Tiendas
+                  <CustomButton variant="primary" size="lg">
+                    {isAuthenticated ? "Ir a Comprar" : "Explorar Tiendas"}
                   </CustomButton>
                 </Link>
               </div>
@@ -93,7 +112,9 @@ export default function Home() {
         {/* CTA Section */}
         <section className="py-16 container-main">
           <div className="bg-gradient-orange rounded-3xl p-12 text-center space-y-6">
-            <h2 className="text-3xl font-bold text-foreground">¿Listo para comprar?</h2>
+            <h2 className="text-3xl font-bold text-foreground">
+              {isAuthenticated && user ? `${user.name.split(' ')[0]}, ¿listo para comprar?` : "¿Listo para comprar?"}
+            </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto whitespace-nowrap">
               Comienza a explorar nuestras tiendas y encuentra todo lo que necesitas
             </p>

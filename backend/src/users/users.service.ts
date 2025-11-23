@@ -15,6 +15,10 @@ export class UsersService {
         return this.userRepository.findOne({ where: { email } });
     }
 
+    async findAll(): Promise<User[]> {
+        return this.userRepository.find();
+    }
+
     async create(userData: Partial<User>): Promise<User> {
         if (!userData.password) {
             throw new Error('Password is required');

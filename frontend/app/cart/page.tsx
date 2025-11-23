@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useAuth } from "@/hooks/use-auth"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -17,6 +19,9 @@ interface CartItem {
 }
 
 export default function CartPage() {
+  const { isAuthenticated, isLoading: authLoading } = useAuth()
+  const router = useRouter()
+
   const [items, setItems] = useState<CartItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -28,6 +33,16 @@ export default function CartPage() {
     }
     setIsLoading(false)
   }, [])
+
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.push('/login')
+    }
+  }, [authLoading, isAuthenticated, router])
+
+  if (authLoading || !isAuthenticated) {
+    return null // Or a loading spinner
+  }
 
   const updateQuantity = (id: string, quantity: number) => {
     if (quantity <= 0) {
@@ -96,7 +111,7 @@ export default function CartPage() {
                         alt={item.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          e.currentTarget.src = `/placeholder.svg?height=96&width=96&query=${encodeURIComponent(item.name)}`
+                          e.currentTarget.src = `/placeholder.svg?height=96&width=96&text=${encodeURIComponent(item.name)}`
                         }}
                       />
                     </div>

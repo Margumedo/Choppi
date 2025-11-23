@@ -10,7 +10,7 @@ interface CustomButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
 export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
   ({ className, variant = "primary", size = "md", isLoading, children, disabled, ...props }, ref) => {
     const baseStyles =
-      "font-medium transition-all duration-200 inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      "font-medium transition-all duration-200 inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
 
     const variants = {
       primary:

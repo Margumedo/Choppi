@@ -502,3 +502,260 @@ It can also happen if the client has a browser extension installed which messes 
 [00:47:59.797] Server  LOG      ✓ Compiled in 120ms
 [00:47:59.860] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
 [00:48:00.136] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:01.234] Server  LOG      ✓ Compiled in 53ms
+[01:22:03.263] Server  LOG      ✓ Compiled in 62ms
+[01:22:16.931] Server  LOG      ✓ Compiled in 130ms
+[01:22:16.932] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:16.932] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:16.934] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:16.934] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:17.032] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:17.032] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:17.099] Server  ERROR    ⨯ ReferenceError: isAuthenticated is not defined
+[01:22:17.108] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:17.108] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:17.265] Server  ERROR    ⨯ ReferenceError: isAuthenticated is not defined
+[01:22:17.270] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:17.270] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:17.329] Server  ERROR    ⨯ ReferenceError: isAuthenticated is not defined
+[01:22:17.371] Server  ERROR    ⨯ ReferenceError: isAuthenticated is not defined
+[01:22:17.662] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:17.716] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:17.735] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:19.019] Server  LOG      ✓ Compiled in 4ms
+[01:22:19.022] Browser ERROR   uncaughtError: Error: Switched to client rendering because the server rendering errored:
+
+isAuthenticated is not defined
+[01:22:19.022] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:19.022] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:19.022] Browser ERROR   uncaughtError: Error: Switched to client rendering because the server rendering errored:
+
+isAuthenticated is not defined
+[01:22:19.126] Server  ERROR    ⨯ ReferenceError: isAuthenticated is not defined
+[01:22:19.182] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:19.239] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:19.390] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:20.173] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:20.173] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:20.452] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:20.453] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:20.454] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:20.543] Server  LOG      ✓ Compiled in 125ms
+[01:22:20.668] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:20.668] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:21.012] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:21.053] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:21.084] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:21.373] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:22.171] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:22:22.171] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:22:22.172] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:22:22.375] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:22:33.486] Server  LOG      ✓ Compiled in 61ms
+[01:22:34.172] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:34.588] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:34.741] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:34.743] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:34.816] Server  LOG      ✓ Compiled in 22ms
+[01:22:34.855] Server  ERROR    ⨯ ReferenceError: isAuthenticated is not defined
+[01:22:34.901] Server  ERROR    ⨯ ReferenceError: isAuthenticated is not defined
+[01:22:34.973] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:35.171] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:35.225] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:36.167] Browser ERROR   uncaughtError: ReferenceError: isAuthenticated is not defined
+[01:22:36.930] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:36.984] Server  LOG      ✓ Compiled in 40ms
+[01:22:37.023] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:22:37.115] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:37.372] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:22:38.172] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:22:38.379] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:22:57.951] Server  LOG      ✓ Compiled in 58ms
+[01:24:29.239] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[01:30:38.014] Server  LOG      ✓ Compiled in 87ms
+[01:32:44.637] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:32:44.769] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:32:46.503] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:32:46.628] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:33:07.745] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[01:41:39.155] Server  LOG      ✓ Compiled in 61ms
+[01:41:41.119] Server  LOG      ✓ Compiled in 62ms
+[01:41:59.442] Server  LOG      ✓ Compiled in 54ms
+[01:42:00.862] Server  LOG      ✓ Compiled in 59ms
+[01:42:19.328] Server  LOG      ✓ Compiled in 88ms
+[01:42:20.002] Browser ERROR   ./app/cart/page.tsx:115:89
+Parsing ecmascript source code failed
+  113 |                         className="w-full h-full object-cover"
+  114 |                         onError={(e) => {
+> 115 |                           e.currentTarget.src = `/ placeholder.svg ? height = 96 & width=96 & query=${ encodeURIComponent(item.name) } `
+      |                                                                                         ^
+  116 |                         }}
+  117 |                       />
+  118 |                     </div>
+
+Expected ':', got '='
+
+Import traces:
+  Client Component Browser:
+    ./app/cart/page.tsx [Client Component Browser]
+    ./app/cart/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/cart/page.tsx [Client Component SSR]
+    ./app/cart/page.tsx [Server Component]
+[01:42:20.173] Browser ERROR   ./app/cart/page.tsx:115:89
+Parsing ecmascript source code failed
+  113 |                         className="w-full h-full object-cover"
+  114 |                         onError={(e) => {
+> 115 |                           e.currentTarget.src = `/ placeholder.svg ? height = 96 & width=96 & query=${ encodeURIComponent(item.name) } `
+      |                                                                                         ^
+  116 |                         }}
+  117 |                       />
+  118 |                     </div>
+
+Expected ':', got '='
+
+Import traces:
+  Client Component Browser:
+    ./app/cart/page.tsx [Client Component Browser]
+    ./app/cart/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/cart/page.tsx [Client Component SSR]
+    ./app/cart/page.tsx [Server Component]
+[01:42:20.173] Browser ERROR   ./app/cart/page.tsx:115:89
+Parsing ecmascript source code failed
+  113 |                         className="w-full h-full object-cover"
+  114 |                         onError={(e) => {
+> 115 |                           e.currentTarget.src = `/ placeholder.svg ? height = 96 & width=96 & query=${ encodeURIComponent(item.name) } `
+      |                                                                                         ^
+  116 |                         }}
+  117 |                       />
+  118 |                     </div>
+
+Expected ':', got '='
+
+Import traces:
+  Client Component Browser:
+    ./app/cart/page.tsx [Client Component Browser]
+    ./app/cart/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/cart/page.tsx [Client Component SSR]
+    ./app/cart/page.tsx [Server Component]
+[01:42:20.183] Browser ERROR   ./app/cart/page.tsx:115:89
+Parsing ecmascript source code failed
+  113 |                         className="w-full h-full object-cover"
+  114 |                         onError={(e) => {
+> 115 |                           e.currentTarget.src = `/ placeholder.svg ? height = 96 & width=96 & query=${ encodeURIComponent(item.name) } `
+      |                                                                                         ^
+  116 |                         }}
+  117 |                       />
+  118 |                     </div>
+
+Expected ':', got '='
+
+Import traces:
+  Client Component Browser:
+    ./app/cart/page.tsx [Client Component Browser]
+    ./app/cart/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/cart/page.tsx [Client Component SSR]
+    ./app/cart/page.tsx [Server Component]
+[01:42:20.183] Browser ERROR   ./app/cart/page.tsx:115:89
+Parsing ecmascript source code failed
+  113 |                         className="w-full h-full object-cover"
+  114 |                         onError={(e) => {
+> 115 |                           e.currentTarget.src = `/ placeholder.svg ? height = 96 & width=96 & query=${ encodeURIComponent(item.name) } `
+      |                                                                                         ^
+  116 |                         }}
+  117 |                       />
+  118 |                     </div>
+
+Expected ':', got '='
+
+Import traces:
+  Client Component Browser:
+    ./app/cart/page.tsx [Client Component Browser]
+    ./app/cart/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/cart/page.tsx [Client Component SSR]
+    ./app/cart/page.tsx [Server Component]
+[01:44:00.801] Server  LOG      ✓ Compiled in 241ms
+[01:44:09.237] Server  LOG      ✓ Compiled in 39ms
+[01:45:06.714] Browser ERROR   React has detected a change in the order of Hooks called by %s. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+%s   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ CartPage 1. useState                   useState
+2. useState                   useState
+3. useState                   useState
+4. useContext                 useContext
+5. useEffect                  useEffect
+6. useContext                 useContext
+7. useEffect                  useEffect
+8. undefined                  useState
+
+[01:45:06.714] Browser ERROR   uncaughtError: Error: Rendered more hooks than during the previous render.
+[01:45:32.879] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:45:33.000] Browser ERROR   React has detected a change in the order of Hooks called by %s. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+%s   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ CartPage 1. useState                   useState
+2. useState                   useState
+3. useState                   useState
+4. useContext                 useContext
+5. useEffect                  useEffect
+6. useContext                 useContext
+7. useEffect                  useEffect
+8. undefined                  useState
+
+[01:45:33.000] Browser ERROR   uncaughtError: Error: Rendered more hooks than during the previous render.
+[01:46:08.474] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:46:08.603] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:46:10.395] Browser ERROR   React has detected a change in the order of Hooks called by %s. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+%s   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ CartPage 1. useState                   useState
+2. useState                   useState
+3. useState                   useState
+4. useContext                 useContext
+5. useEffect                  useEffect
+6. useContext                 useContext
+7. useEffect                  useEffect
+8. undefined                  useState
+
+[01:46:10.395] Browser ERROR   uncaughtError: Error: Rendered more hooks than during the previous render.
+[01:46:34.940] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:46:35.101] Server  LOG      ✓ Compiled in 59ms
+[01:46:35.251] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:46:36.176] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[01:46:44.498] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[18:25:21.437] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:25:21.598] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:25:24.618] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:25:24.747] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:25:35.381] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[18:25:38.469] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:25:38.590] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:25:39.526] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:25:39.656] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:25:40.262] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:25:40.388] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:30:00.991] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[18:30:02.159] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:30:02.304] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:30:04.893] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:30:05.010] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:42:16.789] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:42:16.939] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:42:19.026] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:42:19.153] Browser WARN    Image with src "http://localhost:3002/images/logo-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[18:44:06.843] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior

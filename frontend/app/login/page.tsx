@@ -25,9 +25,16 @@ export default function LoginPage() {
 
     try {
       const response = await api.post('/auth/login', { email, password });
+
+      // Store token and user info
       localStorage.setItem('token', response.data.access_token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      // Force a storage event for hooks to pick up changes immediately if needed
+      window.dispatchEvent(new Event("storage"));
+
       toast.success('¡Bienvenido de nuevo!', {
-        description: 'Has iniciado sesión correctamente.',
+        description: `Hola ${response.data.user.name}, has iniciado sesión correctamente.`,
       });
       router.push('/stores');
     } catch (err) {

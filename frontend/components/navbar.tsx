@@ -4,12 +4,14 @@ import Link from "next/link"
 import { Menu, ShoppingCart, MapPin } from "lucide-react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
+import { useAuth } from "@/hooks/use-auth"
 
 interface NavbarProps {
   cartCount?: number
 }
 
 export function Navbar({ cartCount = 0 }: NavbarProps) {
+  const { user, isAuthenticated, logout } = useAuth()
   const [isAnimating, setIsAnimating] = useState(false)
   const [showText, setShowText] = useState(false)
 
@@ -32,9 +34,8 @@ export function Navbar({ cartCount = 0 }: NavbarProps) {
             <Image src="/images/logo-icon.png" alt="Choppi Logo" width={32} height={32} className="object-contain" />
           </div>
           <span
-            className={`font-bold text-2xl text-primary overflow-hidden transition-all duration-700 ease-in-out ${
-              showText ? "max-w-[200px] opacity-100" : "max-w-0 opacity-0"
-            }`}
+            className={`font-bold text-2xl text-primary overflow-hidden transition-all duration-700 ease-in-out ${showText ? "max-w-[200px] opacity-100" : "max-w-0 opacity-0"
+              }`}
           >
             Choppi
           </span>
@@ -48,6 +49,24 @@ export function Navbar({ cartCount = 0 }: NavbarProps) {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
+          {isAuthenticated && user ? (
+            <div className="hidden sm:flex items-center gap-4">
+              <span className="text-sm font-medium text-foreground">
+                Hola, <span className="text-primary">{user.name.split(' ')[0]}</span>
+              </span>
+              <button
+                onClick={logout}
+                className="text-sm text-muted-foreground hover:text-destructive transition-colors"
+              >
+                Salir
+              </button>
+            </div>
+          ) : (
+            <Link href="/login" className="hidden sm:inline text-foreground hover:text-primary transition-colors">
+              Iniciar Sesión
+            </Link>
+          )}
+
           <Link href="/stores" className="hidden sm:inline text-foreground hover:text-primary transition-colors">
             Tiendas
           </Link>

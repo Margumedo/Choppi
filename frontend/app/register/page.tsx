@@ -43,11 +43,18 @@ export default function RegisterPage() {
     const onSubmit = async (data: RegisterFormValues) => {
         setIsLoading(true)
         try {
-            await api.post('/auth/register', data)
+            const response = await api.post('/auth/register', data)
+
+            // Store token and user info
+            localStorage.setItem('token', response.data.access_token);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+
+            window.dispatchEvent(new Event("storage"));
+
             toast.success('¡Cuenta creada!', {
-                description: 'Ahora puedes iniciar sesión.',
+                description: `Bienvenido ${response.data.user.name}, ya puedes empezar a comprar.`,
             })
-            router.push('/login')
+            router.push('/stores')
         } catch (err: any) {
             const message = err.response?.data?.message || 'Hubo un problema al crear tu cuenta.'
             toast.error('Error al registrarse', {
@@ -107,6 +114,12 @@ export default function RegisterPage() {
                                 </button>
                             </div>
                             {errors.password && <p className="text-sm text-destructive ml-1">{errors.password.message}</p>}
+                            <ul className="text-xs text-muted-foreground list-disc list-inside ml-1 mt-2 space-y-1">
+                                <li>Mínimo 8 caracteres</li>
+                                <li>Al menos una mayúscula</li>
+                                <li>Al menos una minúscula</li>
+                                <li>Al menos un número o carácter especial</li>
+                            </ul>
                         </div>
 
                         <CustomButton type="submit" size="xl" isLoading={isLoading}>

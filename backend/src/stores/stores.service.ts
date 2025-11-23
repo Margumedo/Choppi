@@ -44,6 +44,10 @@ export class StoresService {
         return store;
     }
 
+    async findOneBy(where: any) {
+        return this.storeRepository.findOne({ where });
+    }
+
     async update(id: string, updateStoreDto: UpdateStoreDto) {
         const store = await this.findOne(id);
         this.storeRepository.merge(store, updateStoreDto);
