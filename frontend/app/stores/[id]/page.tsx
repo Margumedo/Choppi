@@ -121,6 +121,7 @@ export default function StoreDetailPage({ params }: { params: Promise<{ id: stri
                     image={item.product.image}
                     inStock={item.stock > 0}
                     storeName={store.name}
+                    storeId={store.id}
                   />
                 ))}
               </div>

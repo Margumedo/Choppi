@@ -11,9 +11,9 @@ interface ProductCardProps {
   inStock?: boolean
 }
 
-export function ProductCard({ id, name, image, price, storeName, inStock = true }: ProductCardProps) {
+export function ProductCard({ id, name, image, price, storeName, inStock = true, storeId }: ProductCardProps & { storeId?: string }) {
   return (
-    <Link href={`/products/${id}`}>
+    <Link href={storeId ? `/stores/${storeId}/products/${id}` : `/products/${id}`}>
       <Card className="cursor-pointer h-full flex flex-col hover:shadow-lg transition-all duration-200">
         <div className="relative aspect-square bg-muted overflow-hidden">
           {image ? (

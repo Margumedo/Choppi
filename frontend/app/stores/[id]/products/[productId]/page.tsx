@@ -1,33 +1,64 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, use } from "react"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { CustomButton } from "@/components/custom-button"
 import { Badge } from "@/components/badge"
 import { QuantitySelector } from "@/components/quantity-selector"
 import { ChevronLeft, Heart, Share2 } from "lucide-react"
+import api from "@/lib/api"
+import { toast } from "sonner"
 
-const PRODUCT = {
-  id: "1",
-  name: "Queso Bufalinda Mozzarella 400GR",
-  description:
-    "Queso mozzarella fresco de la mejor calidad. Perfecta para ensaladas, pizzas y muchos otros platillos. Mantiene su sabor fresco y cremoso.",
-  price: 7.41,
-  image: "/placeholder.svg?key=91qci",
-  store: "Luvebras",
-  inStock: true,
-  rating: 4.8,
-  reviews: 124,
+interface StoreProduct {
+  id: string;
+  price: string;
+  stock: number;
+  store: {
+    id: string;
+    name: string;
+  };
+  product: {
+    id: string;
+    name: string;
+    description: string;
+    image: string;
+    sku?: string;
+  };
 }
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string; productId: string }> }) {
+  const { id, productId } = use(params);
+  const [productData, setProductData] = useState<StoreProduct | null>(null)
+  const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
   const [isFavorite, setIsFavorite] = useState(false)
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await api.get(`/stores/${id}/products/${productId}`);
+        setProductData(response.data);
+      } catch (error) {
+        toast.error("Error al cargar el producto");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProduct();
+  }, [id, productId])
+
   const handleAddToCart = () => {
-    alert(`Agregaste ${quantity} de ${PRODUCT.name} al carrito`)
+    if (!productData) return;
+    // TODO: Implement actual add to cart logic
+    toast.success(`Agregaste ${quantity} de ${productData.product.name} al carrito`)
   }
+
+  if (loading) return <div className="text-center py-20">Cargando producto...</div>
+  if (!productData) return <div className="text-center py-20">Producto no encontrado</div>
+
+  const { product, price, stock, store } = productData;
+  const inStock = stock > 0;
 
   return (
     <>
@@ -35,7 +66,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       <main className="min-h-screen bg-background py-8">
         <div className="container-main max-w-2xl">
           {/* Back Button */}
-          <Link href="/stores/1">
+          <Link href={`/stores/${id}`}>
             <button className="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity mb-6">
               <ChevronLeft size={20} />
               Volver a la tienda
@@ -46,8 +77,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           <div className="bg-card rounded-2xl overflow-hidden mb-6 shadow-ambient">
             <div className="aspect-square bg-gradient-orange flex items-center justify-center">
               <img
-                src={PRODUCT.image || "/placeholder.svg"}
-                alt={PRODUCT.name}
+                src={product.image || "/placeholder.svg"}
+                alt={product.name}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -55,26 +86,26 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
           {/* Store Badge */}
           <div className="mb-4">
-            <Badge variant="store">{PRODUCT.store}</Badge>
+            <Badge variant="store">{store.name}</Badge>
           </div>
 
           {/* Product Info */}
           <div className="space-y-4 mb-8">
-            <h1 className="text-3xl font-bold text-foreground">{PRODUCT.name}</h1>
+            <h1 className="text-3xl font-bold text-foreground">{product.name}</h1>
 
             <div className="flex items-center gap-2">
-              <span className="text-sm text-primary">★ {PRODUCT.rating}</span>
-              <span className="text-sm text-muted-foreground">({PRODUCT.reviews} opiniones)</span>
+              <span className="text-sm text-primary">★ 4.8</span>
+              <span className="text-sm text-muted-foreground">(124 opiniones)</span>
             </div>
 
             <div className="text-4xl font-bold text-primary">
-              ${PRODUCT.price.toFixed(2)}
+              ${Number(price).toFixed(2)}
               <span className="text-sm text-muted-foreground ml-2">ud</span>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed">{PRODUCT.description}</p>
+            <p className="text-muted-foreground leading-relaxed">{product.description}</p>
 
-            {!PRODUCT.inStock && (
+            {!inStock && (
               <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-2 rounded-lg text-sm font-medium">
                 Este producto actualmente está agotado
               </div>
@@ -86,11 +117,11 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             {/* Quantity Selector */}
             <div className="flex items-center justify-between">
               <span className="font-medium text-foreground">Cantidad:</span>
-              <QuantitySelector quantity={quantity} onQuantityChange={setQuantity} />
+              <QuantitySelector quantity={quantity} onQuantityChange={setQuantity} maxQuantity={stock} />
             </div>
 
             {/* Add to Cart Button */}
-            <CustomButton size="xl" onClick={handleAddToCart} disabled={!PRODUCT.inStock}>
+            <CustomButton size="xl" onClick={handleAddToCart} disabled={!inStock}>
               Agregar al Carrito
             </CustomButton>
 
@@ -119,20 +150,22 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <h2 className="text-xl font-bold text-foreground">Información del Producto</h2>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-muted-foreground">Peso</p>
-                <p className="font-semibold text-foreground">400 GR</p>
+                <p className="text-muted-foreground">SKU</p>
+                <p className="font-semibold text-foreground">{(product as any).sku || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-muted-foreground">Tipo</p>
-                <p className="font-semibold text-foreground">Queso Fresco</p>
+                <p className="text-muted-foreground">Categoría</p>
+                <p className="font-semibold text-foreground">General</p>
               </div>
               <div>
-                <p className="text-muted-foreground">Marca</p>
-                <p className="font-semibold text-foreground">Bufalinda</p>
+                <p className="text-muted-foreground">Tienda</p>
+                <p className="font-semibold text-foreground">{store.name}</p>
               </div>
               <div>
                 <p className="text-muted-foreground">Disponibilidad</p>
-                <p className="font-semibold text-secondary">En Stock</p>
+                <p className={`font-semibold ${inStock ? 'text-secondary' : 'text-destructive'}`}>
+                  {inStock ? 'En Stock' : 'Agotado'}
+                </p>
               </div>
             </div>
           </div>

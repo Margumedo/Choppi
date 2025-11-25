@@ -70,6 +70,15 @@ export class StoreProductsService {
         };
     }
 
+    async findOne(storeProductId: string) {
+        const storeProduct = await this.storeProductRepository.findOne({
+            where: { id: storeProductId },
+            relations: ['product', 'store'],
+        });
+        if (!storeProduct) throw new NotFoundException(`StoreProduct with ID ${storeProductId} not found`);
+        return storeProduct;
+    }
+
     async update(storeProductId: string, updateStoreProductDto: UpdateStoreProductDto) {
         const storeProduct = await this.storeProductRepository.findOne({ where: { id: storeProductId } });
         if (!storeProduct) throw new NotFoundException(`StoreProduct with ID ${storeProductId} not found`);

@@ -35,6 +35,12 @@ export class StoreProductsController {
         return this.storeProductsService.findAll(storeId, Number(page), Number(limit), search, inStockBool);
     }
 
+    @Get(':storeProductId')
+    @ApiOperation({ summary: 'Get a specific product in a store' })
+    findOne(@Param('storeProductId', ParseUUIDPipe) storeProductId: string) {
+        return this.storeProductsService.findOne(storeProductId);
+    }
+
     @Put(':storeProductId')
     @ApiOperation({ summary: 'Update price or stock of a product in a store' })
     update(

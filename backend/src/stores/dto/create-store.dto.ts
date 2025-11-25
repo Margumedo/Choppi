@@ -11,4 +11,9 @@ export class CreateStoreDto {
     @IsString()
     @IsOptional()
     address?: string;
+
+    @ApiPropertyOptional({ example: '/stores/logo.png' })
+    @IsString()
+    @IsOptional()
+    image?: string;
 }
