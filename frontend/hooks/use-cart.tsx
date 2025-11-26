@@ -1,7 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { toast } from "sonner"
+import React, { createContext, useContext, useState, useEffect } from "react"
 
 export interface CartItem {
     id: string // storeProductId
@@ -14,9 +13,22 @@ export interface CartItem {
     storeId: string
 }
 
+interface CartContextType {
+    items: CartItem[]
+    addToCart: (product: Omit<CartItem, "quantity">, quantity?: number) => void
+    removeFromCart: (id: string) => void
+    updateQuantity: (id: string, quantity: number) => void
+    clearCart: () => void
+    getCartCount: () => number
+    getSubtotal: () => number
+    isLoaded: boolean
+}
+
+const CartContext = createContext<CartContextType | undefined>(undefined)
+
 const CART_STORAGE_KEY = "choppi-cart"
 
-export function useCart() {
+export function CartProvider({ children }: { children: React.ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([])
     const [isLoaded, setIsLoaded] = useState(false)
 
@@ -46,7 +58,6 @@ export function useCart() {
 
             if (existingItem) {
                 // Update quantity if product already in cart
-                toast.success(`Actualizado: ${product.name}`)
                 return prevItems.map((item) =>
                     item.id === product.id
                         ? { ...item, quantity: item.quantity + quantity }
@@ -54,7 +65,6 @@ export function useCart() {
                 )
             } else {
                 // Add new product to cart
-                toast.success(`Agregado al carrito: ${product.name}`)
                 return [...prevItems, { ...product, quantity }]
             }
         })
@@ -62,29 +72,22 @@ export function useCart() {
 
     const removeFromCart = (id: string) => {
         setItems((prevItems) => {
-            const item = prevItems.find((i) => i.id === id)
-            if (item) {
-                toast.info(`Eliminado: ${item.name}`)
-            }
             return prevItems.filter((item) => item.id !== id)
         })
     }
 
     const updateQuantity = (id: string, quantity: number) => {
-        if (quantity <= 0) {
-            removeFromCart(id)
-        } else {
-            setItems((prevItems) =>
-                prevItems.map((item) =>
-                    item.id === id ? { ...item, quantity } : item
-                )
+        if (quantity < 1) return // Prevent going below 1
+
+        setItems((prevItems) =>
+            prevItems.map((item) =>
+                item.id === id ? { ...item, quantity } : item
             )
-        }
+        )
     }
 
     const clearCart = () => {
         setItems([])
-        toast.info("Carrito vacío")
     }
 
     const getCartCount = () => {
@@ -95,14 +98,29 @@ export function useCart() {
         return items.reduce((sum, item) => sum + item.price * item.quantity, 0)
     }
 
-    return {
+    return (
+        <CartContext.Provider
+            value= {{
         items,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        getCartCount,
-        getSubtotal,
-        isLoaded,
+            addToCart,
+            removeFromCart,
+            updateQuantity,
+            clearCart,
+            getCartCount,
+            getSubtotal,
+            isLoaded,
+            }
+}
+        >
+    { children }
+    </CartContext.Provider>
+    )
+}
+
+export function useCart() {
+    const context = useContext(CartContext)
+    if (context === undefined) {
+        throw new Error("useCart must be used within a CartProvider")
     }
+    return context
 }

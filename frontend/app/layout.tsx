@@ -24,6 +24,8 @@ export const viewport: Viewport = {
   themeColor: "#FF8A00",
 }
 
+import { CartProvider } from "@/hooks/use-cart"
+
 export default function RootLayout({
   children,
 }: {
@@ -32,8 +34,10 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased bg-background text-foreground`}>
-        {children}
-        <Toaster position="top-center" richColors />
+        <CartProvider>
+          {children}
+          <Toaster position="bottom-right" richColors />
+        </CartProvider>
       </body>
     </html>
   )
