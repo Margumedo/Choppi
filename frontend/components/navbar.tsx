@@ -5,17 +5,31 @@ import { Menu, ShoppingCart, MapPin } from "lucide-react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { useAuth } from "@/hooks/use-auth"
+import { usePathname } from "next/navigation"
+import { useCart } from "@/hooks/use-cart"
 
-interface NavbarProps {
-  cartCount?: number
-}
-
-export function Navbar({ cartCount = 0 }: NavbarProps) {
+export function Navbar() {
   const { user, isAuthenticated, logout } = useAuth()
+  const { getCartCount } = useCart()
+  const pathname = usePathname()
   const [isAnimating, setIsAnimating] = useState(false)
   const [showText, setShowText] = useState(false)
 
+  // Only animate logo on Home and Stores list pages
+  const shouldAnimate = pathname === "/" || pathname === "/stores"
+
   useEffect(() => {
+    // Reset states when pathname changes
+    setIsAnimating(false)
+    setShowText(false)
+
+    if (!shouldAnimate) {
+      // On non-animated pages, show everything immediately
+      setShowText(true)
+      return
+    }
+
+    // Animate on allowed pages
     const timer1 = setTimeout(() => setIsAnimating(true), 500)
     const timer2 = setTimeout(() => setShowText(true), 1000)
 
@@ -23,7 +37,7 @@ export function Navbar({ cartCount = 0 }: NavbarProps) {
       clearTimeout(timer1)
       clearTimeout(timer2)
     }
-  }, [])
+  }, [pathname, shouldAnimate])
 
   return (
     <nav className="sticky top-0 z-40 bg-card border-b border-border shadow-ambient">
@@ -75,9 +89,9 @@ export function Navbar({ cartCount = 0 }: NavbarProps) {
           </button>
           <Link href="/cart" className="relative p-2 hover:bg-muted rounded-lg">
             <ShoppingCart size={24} className="text-foreground" />
-            {cartCount > 0 && (
+            {getCartCount() > 0 && (
               <span className="absolute -top-1 -right-1 bg-destructive text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                {cartCount}
+                {getCartCount()}
               </span>
             )}
           </Link>

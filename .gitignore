@@ -9,3 +9,5 @@ frontend-old/
 *.pdf
 *.docx
 choppi-frontend-app/
+.next
+.env.local

@@ -8,31 +8,12 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { CustomButton } from "@/components/custom-button"
 import { Trash2, Plus, Minus, ShoppingBag } from "lucide-react"
-
-interface CartItem {
-  id: string
-  name: string
-  price: number
-  quantity: number
-  image: string
-  storeName: string
-}
+import { useCart, type CartItem } from "@/hooks/use-cart"
 
 export default function CartPage() {
   const { isAuthenticated, isLoading: authLoading } = useAuth()
   const router = useRouter()
-
-  const [items, setItems] = useState<CartItem[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    // Load cart from localStorage
-    const savedCart = localStorage.getItem("choppi-cart")
-    if (savedCart) {
-      setItems(JSON.parse(savedCart))
-    }
-    setIsLoading(false)
-  }, [])
+  const { items, updateQuantity, removeFromCart, getSubtotal, isLoaded } = useCart()
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -44,30 +25,14 @@ export default function CartPage() {
     return null // Or a loading spinner
   }
 
-  const updateQuantity = (id: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeItem(id)
-    } else {
-      const updated = items.map((item) => (item.id === id ? { ...item, quantity } : item))
-      setItems(updated)
-      localStorage.setItem("choppi-cart", JSON.stringify(updated))
-    }
-  }
-
-  const removeItem = (id: string) => {
-    const updated = items.filter((item) => item.id !== id)
-    setItems(updated)
-    localStorage.setItem("choppi-cart", JSON.stringify(updated))
-  }
-
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const subtotal = getSubtotal()
   const serviceFee = subtotal > 0 ? 1.5 : 0
   const total = subtotal + serviceFee
 
-  if (isLoading) {
+  if (!isLoaded) {
     return (
       <>
-        <Navbar cartCount={items.length} />
+        <Navbar />
         <div className="min-h-screen bg-background flex items-center justify-center">
           <p className="text-muted-foreground">Cargando carrito...</p>
         </div>
@@ -77,7 +42,7 @@ export default function CartPage() {
 
   return (
     <>
-      <Navbar cartCount={items.length} />
+      <Navbar />
 
       <main className="min-h-screen bg-background">
         <div className="container-main py-12">
@@ -141,7 +106,7 @@ export default function CartPage() {
                         <Plus size={18} className="text-foreground" />
                       </button>
                       <button
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeFromCart(item.id)}
                         className="p-2 hover:bg-destructive/10 rounded-lg transition-colors ml-4"
                         aria-label="Eliminar del carrito"
                       >
