@@ -172,7 +172,7 @@ async function bootstrap() {
         { name: 'Aceitunas Rellenas', sku: 'ENL-ACE-001', description: 'Aceitunas verdes rellenas de pimiento', image: '/products/aceitunas.jpg' },
         { name: 'Diablitos Underwood', sku: 'ENL-DIA-001', description: 'Jamón endiablado original', image: '/products/diablitos.jpg' },
         { name: 'Caraotas Negras', sku: 'ENL-CAR-001', description: 'Caraotas negras listas para comer', image: '/products/caraotas.jpg' },
-        { name: 'Champiñones Laminados', sku: 'ENL-CHA-001', description: 'Champiñones en salmuera', image: '/products/champiñones.jpg' },
+        { name: 'Champiñones Laminados', sku: 'ENL-CHA-001', description: 'Champiñones en salmuera', image: '/products/champinones.jpg' },
         { name: 'Melocotones en Almíbar', sku: 'ENL-MEL-001', description: 'Mitades de melocotón 820g', image: '/products/melocoton.jpg' },
         { name: 'Leche Condensada', sku: 'ENL-LEC-001', description: 'Leche condensada azucarada', image: '/products/lechecondensada.jpg' },
         { name: 'Salsa de Tomate', sku: 'ENL-SAL-001', description: 'Salsa de tomate ketchup 397g', image: '/products/salsadetomate.jpg' },

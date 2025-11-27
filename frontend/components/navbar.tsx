@@ -16,8 +16,8 @@ export function Navbar() {
   const [showText, setShowText] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // Only animate logo on Home and Stores list pages
-  const shouldAnimate = pathname === "/" || pathname === "/stores"
+  // Only animate logo on Home
+  const shouldAnimate = pathname === "/"
 
   useEffect(() => {
     // Reset states when pathname changes
