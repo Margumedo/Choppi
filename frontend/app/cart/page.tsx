@@ -9,6 +9,7 @@ import { Footer } from "@/components/footer"
 import { CustomButton } from "@/components/custom-button"
 import { Trash2, Plus, Minus, ShoppingBag } from "lucide-react"
 import { useCart, type CartItem } from "@/hooks/use-cart"
+import { toast } from "sonner"
 
 export default function CartPage() {
   const { isAuthenticated, isLoading: authLoading } = useAuth()
@@ -92,7 +93,8 @@ export default function CartPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="p-2 hover:bg-muted rounded-lg transition-colors"
+                        disabled={item.quantity <= 1}
+                        className="p-2 hover:bg-muted rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="Disminuir cantidad"
                       >
                         <Minus size={18} className="text-foreground" />
@@ -106,7 +108,10 @@ export default function CartPage() {
                         <Plus size={18} className="text-foreground" />
                       </button>
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => {
+                          removeFromCart(item.id)
+                          toast.info(`Eliminado: ${item.name}`)
+                        }}
                         className="p-2 hover:bg-destructive/10 rounded-lg transition-colors ml-4"
                         aria-label="Eliminar del carrito"
                       >

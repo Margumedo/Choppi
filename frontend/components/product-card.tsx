@@ -6,6 +6,7 @@ import { Badge } from "./badge"
 import { ShoppingCart } from "lucide-react"
 import { useCart } from "@/hooks/use-cart"
 import { useState } from "react"
+import { toast } from "sonner"
 
 interface ProductCardProps {
   id: string
@@ -41,6 +42,7 @@ export function ProductCard({ id, name, image, price, storeName, inStock = true,
 
     // Reset button state after animation
     setTimeout(() => setIsAdding(false), 1000)
+    toast.success(`Agregado al carrito: ${name}`)
   }
 
   return (
@@ -72,8 +74,8 @@ export function ProductCard({ id, name, image, price, storeName, inStock = true,
             onClick={handleAddToCart}
             disabled={!inStock || isAdding}
             className={`absolute bottom-2 right-2 p-2 rounded-lg transition-all duration-200 ${!inStock
-                ? "opacity-0"
-                : "bg-primary text-white shadow-lg opacity-0 group-hover:opacity-100 hover:scale-110 disabled:opacity-50"
+              ? "opacity-0"
+              : "bg-primary text-white shadow-lg opacity-0 group-hover:opacity-100 hover:scale-110 disabled:opacity-50"
               }`}
             aria-label="Agregar al carrito"
           >

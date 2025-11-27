@@ -9,6 +9,7 @@ import { QuantitySelector } from "@/components/quantity-selector"
 import { ChevronLeft, Heart, Share2 } from "lucide-react"
 import api from "@/lib/api"
 import { toast } from "sonner"
+import { useCart } from "@/hooks/use-cart"
 
 interface StoreProduct {
   id: string;
@@ -33,6 +34,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
   const [isFavorite, setIsFavorite] = useState(false)
+  const { addToCart } = useCart()
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -50,7 +52,16 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   const handleAddToCart = () => {
     if (!productData) return;
-    // TODO: Implement actual add to cart logic
+
+    addToCart({
+      id: productData.id, // storeProductId
+      productId: productData.product.id,
+      name: productData.product.name,
+      price: Number(productData.price),
+      image: productData.product.image || "/placeholder.svg",
+      storeName: productData.store.name,
+      storeId: productData.store.id,
+    }, quantity)
     toast.success(`Agregaste ${quantity} de ${productData.product.name} al carrito`)
   }
 

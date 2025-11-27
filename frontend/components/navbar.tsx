@@ -14,6 +14,7 @@ export function Navbar() {
   const pathname = usePathname()
   const [isAnimating, setIsAnimating] = useState(false)
   const [showText, setShowText] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Only animate logo on Home and Stores list pages
   const shouldAnimate = pathname === "/" || pathname === "/stores"
@@ -22,6 +23,7 @@ export function Navbar() {
     // Reset states when pathname changes
     setIsAnimating(false)
     setShowText(false)
+    setIsMobileMenuOpen(false)
 
     if (!shouldAnimate) {
       // On non-animated pages, show everything immediately
@@ -65,12 +67,12 @@ export function Navbar() {
         <div className="flex items-center gap-4">
           {isAuthenticated && user ? (
             <div className="hidden sm:flex items-center gap-4">
-              <span className="text-sm font-medium text-foreground">
+              <span className="text-base font-medium text-foreground">
                 Hola, <span className="text-primary">{user.name.split(' ')[0]}</span>
               </span>
               <button
                 onClick={logout}
-                className="text-sm text-muted-foreground hover:text-destructive transition-colors"
+                className="text-base text-muted-foreground hover:text-destructive transition-colors"
               >
                 Salir
               </button>
@@ -84,7 +86,10 @@ export function Navbar() {
           <Link href="/stores" className="hidden sm:inline text-foreground hover:text-primary transition-colors">
             Tiendas
           </Link>
-          <button className="sm:hidden p-2 hover:bg-muted rounded-lg">
+          <button
+            className="sm:hidden p-2 hover:bg-muted rounded-lg"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
             <Menu size={24} className="text-foreground" />
           </button>
           <Link href="/cart" className="relative p-2 hover:bg-muted rounded-lg">
@@ -97,6 +102,42 @@ export function Navbar() {
           </Link>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="sm:hidden border-t border-border bg-card p-6 space-y-6 animate-in slide-in-from-top-5 text-center">
+          <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm pb-4 border-b border-border">
+            <MapPin size={16} />
+            <span>Casa</span>
+          </div>
+
+          {isAuthenticated && user ? (
+            <div className="space-y-4">
+              <div className="font-medium text-foreground text-lg">
+                Hola, <span className="text-primary">{user.name.split(' ')[0]}</span>
+              </div>
+              <Link href="/stores" className="block text-foreground hover:text-primary transition-colors text-lg py-2">
+                Tiendas
+              </Link>
+              <button
+                onClick={logout}
+                className="w-full text-center text-muted-foreground hover:text-destructive transition-colors text-lg py-2"
+              >
+                Salir
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <Link href="/login" className="block text-foreground hover:text-primary transition-colors text-lg py-2">
+                Iniciar Sesión
+              </Link>
+              <Link href="/stores" className="block text-foreground hover:text-primary transition-colors text-lg py-2">
+                Tiendas
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
     </nav>
   )
 }
