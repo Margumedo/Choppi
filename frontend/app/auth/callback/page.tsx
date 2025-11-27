@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 
-export default function AuthCallback() {
+function CallbackContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -49,5 +49,20 @@ export default function AuthCallback() {
                 <p className="text-white text-lg font-medium">Iniciando sesión con Google...</p>
             </div>
         </div>
+    );
+}
+
+export default function AuthCallback() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gradient-to-b from-primary via-primary/80 to-primary/60 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+                    <p className="text-white text-lg font-medium">Cargando...</p>
+                </div>
+            </div>
+        }>
+            <CallbackContent />
+        </Suspense>
     );
 }
