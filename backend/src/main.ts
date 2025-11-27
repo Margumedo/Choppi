@@ -11,7 +11,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Choppi API')
-    .setDescription('The Choppi API description')
+    .setDescription('API RESTful para la gestión de la plataforma e-commerce multi-tienda Choppi.\n\nIncluye módulos para:\n- **Autenticación**: Login local y OAuth2 con Google.\n- **Tiendas**: Gestión de sucursales e inventarios.\n- **Productos**: Catálogo global y precios dinámicos.\n- **Carrito**: Cotización y validación de compras.')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
