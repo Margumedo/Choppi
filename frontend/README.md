@@ -5,36 +5,43 @@ Aplicación web moderna y responsiva para Choppi, enfocada en una experiencia de
 ## 💻 Stack Tecnológico
 *   **Framework**: Next.js 15 (App Router)
 *   **Lenguaje**: TypeScript
-*   **Estilos**: Tailwind CSS
+*   **Estilos**: Tailwind CSS v4
+*   **Componentes**: Radix UI + Shadcn Concepts
 *   **Iconos**: Lucide React
 *   **Notificaciones**: Sonner
 *   **Cliente HTTP**: Axios
 
-## 🚀 Características UI
-*   **Glassmorphism**: Estética moderna con transparencias y desenfoques.
-*   **Animaciones**: Transiciones suaves y micro-interacciones.
-*   **Responsive**: Adaptable a móviles, tablets y escritorio.
-*   **Modo Oscuro**: Soporte nativo (preparado).
+## 🔧 Configuración
 
-## 🛠️ Instalación y Ejecución
+### Variables de Entorno (.env.local)
+Crea un archivo `.env.local` en la raíz de `/frontend` para conectar con tu backend:
+
+```env
+# URL del Backend (sin slash al final)
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+### Instalación y Ejecución
 
 ```bash
-# Instalar dependencias
+# 1. Instalar dependencias
 npm install
 
-# Servidor de desarrollo
+# 2. Servidor de desarrollo
 npm run dev
 ```
 Abre `http://localhost:3001` en tu navegador.
 
-## 📂 Estructura de Carpetas
-*   `/app`: Rutas y páginas (Next.js App Router).
-*   `/components`: Componentes reutilizables (UI Kit).
-*   `/lib`: Utilidades y configuración de API (Axios).
-*   `/public`: Activos estáticos (imágenes, iconos).
+## 📂 Estructura del Proyecto
 
-## 🔐 Autenticación
-El frontend maneja la sesión mediante JWT almacenado en `localStorage`.
-*   `/login`: Inicio de sesión.
-*   `/register`: Registro de nuevos usuarios.
-*   Rutas protegidas redirigen automáticamente al login si no hay sesión.
+*   `/app`: Rutas y páginas (Next.js App Router).
+    *   `(auth)`: Rutas de autenticación.
+    *   `/stores`: Flujo principal de compra.
+*   `/components`: Biblioteca de componentes reutilizables.
+*   `/hooks`: Lógica de negocio encapsulada (`use-cart`, `use-auth`).
+*   `/lib`: Configuración de cliente API (Axios) y utilidades.
+*   `/public`: Activos estáticos.
+
+## 🔐 Autenticación & Estado
+*   **Auth**: Manejo de sesión híbrido (JWT en localStorage + Cookies opcionales). Soporta redirección post-login.
+*   **Carrito**: Estado persistente del lado del cliente para mantener la selección de productos entre recargas.
