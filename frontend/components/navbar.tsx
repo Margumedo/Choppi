@@ -68,7 +68,7 @@ export function Navbar() {
           {isAuthenticated && user ? (
             <div className="hidden sm:flex items-center gap-4">
               <span className="text-base font-medium text-foreground">
-                Hola, <span className="text-primary">{user.name.split(' ')[0]}</span>
+                Hola, <span className="text-primary">{user.name ? user.name.split(' ')[0] : user.email?.split('@')[0] || 'Usuario'}</span>
               </span>
               <button
                 onClick={logout}
@@ -112,10 +112,10 @@ export function Navbar() {
           </div>
 
           {isAuthenticated && user ? (
-            <div className="space-y-4">
-              <div className="font-medium text-foreground text-lg">
-                Hola, <span className="text-primary">{user.name.split(' ')[0]}</span>
-              </div>
+            <div className="text-center">
+              <p className="text-base text-primary-foreground font-medium">
+                Hola, {user.name ? user.name.split(' ')[0] : user.email?.split('@')[0] || 'Usuario'}
+              </p>
               <Link href="/stores" className="block text-foreground hover:text-primary transition-colors text-lg py-2">
                 Tiendas
               </Link>

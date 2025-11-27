@@ -98,7 +98,7 @@ export default function Home() {
         <section className="py-16 container-main">
           <div className="bg-gradient-orange rounded-3xl p-12 text-center space-y-6">
             <h2 className="text-3xl font-bold text-foreground">
-              {isAuthenticated && user ? `¿Listo para comprar, ${user.name.split(' ')[0]}?` : "¿Listo para comprar?"}
+              {isAuthenticated && user ? `¿Listo para comprar, ${user.name ? user.name.split(' ')[0] : user.email?.split('@')[0] || 'Usuario'}?` : "¿Listo para comprar?"}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto whitespace-nowrap">
               Comienza a explorar nuestras tiendas y encuentra todo lo que necesitas
