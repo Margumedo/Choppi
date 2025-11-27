@@ -5,9 +5,10 @@ import type React from "react"
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { CustomButton } from "@/components/custom-button"
 import { CustomInput } from "@/components/custom-input"
-import { Mail, Lock, Eye, EyeOff, User } from "lucide-react"
+import { Mail, Lock, Eye, EyeOff, User, ArrowRight } from "lucide-react"
 import api from "@/lib/api"
 import { toast } from "sonner"
 import { useForm } from "react-hook-form"
@@ -66,81 +67,117 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-primary via-primary/80 to-primary/60 flex items-center justify-center p-4">
-            <div className="w-full max-w-md">
-                {/* Logo */}
-                <div className="text-center mb-8">
-                    <h1 className="text-5xl font-bold text-primary-foreground mb-2">Choppi</h1>
-                    <p className="text-primary-foreground/80">Únete a la comunidad</p>
+        <div className="min-h-screen flex bg-background">
+            {/* Left Side - Visual (Hidden on mobile) */}
+            <div className="hidden lg:flex lg:w-1/2 relative bg-black">
+                <Image
+                    src="/images/carousel/branded-delivery.jpg"
+                    alt="Choppi Delivery"
+                    fill
+                    className="object-cover opacity-80"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/40" />
+
+                {/* Logo on Image */}
+                <div className="absolute top-8 left-8 flex items-center gap-3">
+                    <div className="relative w-10 h-10">
+                        <Image src="/images/logo-icon.png" alt="Logo" fill className="object-contain" />
+                    </div>
+                    <span className="text-white font-bold text-2xl tracking-tight">Choppi</span>
                 </div>
 
-                {/* Form Card */}
-                <div className="bg-card rounded-3xl p-8 space-y-6 shadow-lg">
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                        <div className="space-y-2">
-                            <CustomInput
-                                type="text"
-                                placeholder="Nombre completo"
-                                icon={<User size={18} />}
-                                {...register("name")}
-                            />
-                            {errors.name && <p className="text-sm text-destructive ml-1">{errors.name.message}</p>}
-                        </div>
+                <div className="absolute bottom-12 left-12 max-w-md text-white p-4">
+                    <h2 className="text-4xl font-bold mb-4 leading-tight">Únete a la<br />revolución del mercado.</h2>
+                    <p className="text-white/80 text-lg">Crea tu cuenta y recibe tus compras en minutos, estés donde estés.</p>
+                </div>
+            </div>
 
-                        <div className="space-y-2">
-                            <CustomInput
-                                type="email"
-                                placeholder="Correo electrónico"
-                                icon={<Mail size={18} />}
-                                {...register("email")}
-                            />
-                            {errors.email && <p className="text-sm text-destructive ml-1">{errors.email.message}</p>}
+            {/* Right Side - Functional */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-24 bg-background">
+                <div className="w-full max-w-md space-y-8 animate-in slide-in-from-bottom-5 fade-in duration-500">
+                    
+                    {/* Mobile Logo */}
+                    <div className="lg:hidden text-center mb-8">
+                        <div className="inline-block p-3 rounded-2xl bg-primary/10 mb-4">
+                            <Image src="/images/logo-icon.png" alt="Logo" width={48} height={48} className="object-contain" />
                         </div>
+                        <h1 className="text-2xl font-bold text-primary">Choppi</h1>
+                    </div>
 
-                        <div className="space-y-2">
-                            <div className="relative">
+                    <div className="text-center lg:text-left space-y-2">
+                        <h1 className="text-4xl font-extrabold tracking-tight text-foreground">Crea tu cuenta</h1>
+                        <p className="text-muted-foreground text-lg">Completa tus datos para comenzar.</p>
+                    </div>
+
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                        <div className="space-y-4">
+                            <div className="space-y-2">
                                 <CustomInput
-                                    type={showPassword ? "text" : "password"}
-                                    placeholder="Contraseña"
-                                    icon={<Lock size={18} />}
-                                    {...register("password")}
+                                    type="text"
+                                    placeholder="Nombre completo"
+                                    icon={<User size={20} />}
+                                    {...register("name")}
+                                    className="h-14 bg-muted/30 border-border focus:bg-background transition-all"
                                 />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                                >
-                                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                </button>
+                                {errors.name && <p className="text-sm text-destructive ml-1">{errors.name.message}</p>}
                             </div>
-                            {errors.password && <p className="text-sm text-destructive ml-1">{errors.password.message}</p>}
-                            <ul className="text-xs text-muted-foreground list-disc list-inside ml-1 mt-2 space-y-1">
-                                <li>Mínimo 8 caracteres</li>
-                                <li>Al menos una mayúscula</li>
-                                <li>Al menos una minúscula</li>
-                                <li>Al menos un número o carácter especial</li>
-                            </ul>
+
+                            <div className="space-y-2">
+                                <CustomInput
+                                    type="email"
+                                    placeholder="Correo electrónico"
+                                    icon={<Mail size={20} />}
+                                    {...register("email")}
+                                    className="h-14 bg-muted/30 border-border focus:bg-background transition-all"
+                                />
+                                {errors.email && <p className="text-sm text-destructive ml-1">{errors.email.message}</p>}
+                            </div>
+
+                            <div className="space-y-2">
+                                <div className="relative">
+                                    <CustomInput
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="Crea una contraseña"
+                                        icon={<Lock size={20} />}
+                                        {...register("password")}
+                                        className="h-14 bg-muted/30 border-border focus:bg-background transition-all"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                                    >
+                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                    </button>
+                                </div>
+                                {errors.password && <p className="text-sm text-destructive ml-1">{errors.password.message}</p>}
+                                <ul className="text-xs text-muted-foreground list-disc list-inside ml-1 mt-2 space-y-1 pl-2">
+                                    <li>Mínimo 8 caracteres</li>
+                                    <li>Al menos una mayúscula</li>
+                                    <li>Al menos una minúscula</li>
+                                    <li>Al menos un número o carácter especial</li>
+                                </ul>
+                            </div>
                         </div>
 
-                        <CustomButton type="submit" size="xl" isLoading={isLoading}>
-                            Registrarse
+                        <CustomButton type="submit" size="xl" isLoading={isLoading} className="w-full text-lg font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200">
+                            Registrarse <ArrowRight className="ml-2 h-5 w-5" />
                         </CustomButton>
                     </form>
 
-                    {/* Divider */}
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-border" />
+                            <span className="w-full border-t border-border" />
                         </div>
-                        <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-card text-muted-foreground">O</span>
+                        <div className="relative flex justify-center text-xs uppercase">
+                             <span className="bg-background px-2 text-muted-foreground font-medium">O</span>
                         </div>
                     </div>
 
-                    {/* Login Link */}
                     <p className="text-center text-muted-foreground">
                         ¿Ya tienes cuenta?{" "}
-                        <Link href="/login" className="text-primary font-semibold hover:underline">
+                        <Link href="/login" className="text-primary font-bold hover:underline decoration-2 underline-offset-4">
                             Inicia sesión
                         </Link>
                     </p>
