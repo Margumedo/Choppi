@@ -26,31 +26,68 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-const CART_STORAGE_KEY = "choppi-cart"
+// Helper to get storage key based on user
+const getCartStorageKey = () => {
+    // Get user from localStorage
+    const userStr = localStorage.getItem('user')
+    if (userStr) {
+        try {
+            const user = JSON.parse(userStr)
+            // Use user ID for personalized cart
+            return `choppi-cart-${user.sub || user.id || 'guest'}`
+        } catch (e) {
+            console.error('Error parsing user:', e)
+        }
+    }
+    // Fallback to guest cart
+    return 'choppi-cart-guest'
+}
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([])
     const [isLoaded, setIsLoaded] = useState(false)
+    const [currentStorageKey, setCurrentStorageKey] = useState<string>('')
 
-    // Load cart from localStorage on mount
+    // Load cart from localStorage on mount and when user changes
     useEffect(() => {
-        const savedCart = localStorage.getItem(CART_STORAGE_KEY)
-        if (savedCart) {
-            try {
-                setItems(JSON.parse(savedCart))
-            } catch (e) {
-                console.error("Failed to parse cart from localStorage", e)
+        const loadCart = () => {
+            const storageKey = getCartStorageKey()
+            setCurrentStorageKey(storageKey)
+
+            const savedCart = localStorage.getItem(storageKey)
+            if (savedCart) {
+                try {
+                    setItems(JSON.parse(savedCart))
+                } catch (e) {
+                    console.error("Failed to parse cart from localStorage", e)
+                    setItems([])
+                }
+            } else {
+                setItems([])
             }
+            setIsLoaded(true)
         }
-        setIsLoaded(true)
+
+        loadCart()
+
+        // Listen for storage events (user login/logout)
+        const handleStorageChange = () => {
+            loadCart()
+        }
+
+        window.addEventListener('storage', handleStorageChange)
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange)
+        }
     }, [])
 
     // Save to localStorage whenever items change
     useEffect(() => {
-        if (isLoaded) {
-            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
+        if (isLoaded && currentStorageKey) {
+            localStorage.setItem(currentStorageKey, JSON.stringify(items))
         }
-    }, [items, isLoaded])
+    }, [items, isLoaded, currentStorageKey])
 
     const addToCart = (product: Omit<CartItem, "quantity">, quantity: number = 1) => {
         setItems((prevItems) => {
@@ -100,20 +137,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     return (
         <CartContext.Provider
-            value= {{
-        items,
-            addToCart,
-            removeFromCart,
-            updateQuantity,
-            clearCart,
-            getCartCount,
-            getSubtotal,
-            isLoaded,
-            }
-}
+            value={{
+                items,
+                addToCart,
+                removeFromCart,
+                updateQuantity,
+                clearCart,
+                getCartCount,
+                getSubtotal,
+                isLoaded,
+            }}
         >
-    { children }
-    </CartContext.Provider>
+            {children}
+        </CartContext.Provider>
     )
 }
 

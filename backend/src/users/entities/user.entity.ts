@@ -9,12 +9,15 @@ export class User {
     @Column({ unique: true })
     email: string;
 
-    @Column()
+    @Column({ nullable: true }) // Nullable for Google OAuth users
     @Exclude()
     password: string;
 
     @Column({ nullable: true })
     name: string;
+
+    @Column({ nullable: true, unique: true }) // Google OAuth ID
+    googleId: string;
 
     @CreateDateColumn()
     createdAt: Date;

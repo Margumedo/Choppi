@@ -15,6 +15,10 @@ export class UsersService {
         return this.userRepository.findOne({ where: { email } });
     }
 
+    async findOneByGoogleId(googleId: string): Promise<User | null> {
+        return this.userRepository.findOne({ where: { googleId } });
+    }
+
     async findAll(): Promise<User[]> {
         return this.userRepository.find();
     }
@@ -29,5 +33,37 @@ export class UsersService {
             password: hashedPassword,
         });
         return this.userRepository.save(user);
+    }
+
+    async findOrCreateGoogleUser(googleData: {
+        googleId: string;
+        email: string;
+        name: string;
+    }): Promise<User> {
+        // 1. Try to find by Google ID
+        let user = await this.findOneByGoogleId(googleData.googleId);
+
+        if (user) {
+            return user; // User already exists with this Google account
+        }
+
+        // 2. Try to find by email (link existing account)
+        user = await this.findOneByEmail(googleData.email);
+
+        if (user) {
+            // Link Google ID to existing account
+            user.googleId = googleData.googleId;
+            return this.userRepository.save(user);
+        }
+
+        // 3. Create new user
+        const newUser = this.userRepository.create({
+            email: googleData.email,
+            name: googleData.name,
+            googleId: googleData.googleId,
+            // password is optional for Google users
+        });
+
+        return this.userRepository.save(newUser);
     }
 }
